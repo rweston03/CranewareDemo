@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="col-10 px-0 mx-auto">
+        <div class="border backgroundWhite container p-3">
+            <div class="row text-center justify-content-center">
+                <h4 class="text-center">Books</h4>
+            </div>
+            <br />
+            <br />
+            <table id="DTbooks" class="table table-striped table-bordered mx-0 w-100">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Author
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var dtBooks;
+
+        $(document).ready(function () {
+            loadList();
+        });
+
+        function loadList() {
+            dtBooks = $('#DTbooks').DataTable({
+                "ajax": {
+                    "url": "/api/book/1",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { data: "title", width: "20%" },
+                    { data: "author", width: "35%" },
+                ],
+                "language": {
+                    "emptyTable": "no data found."
+                }
+            });
+        }
+    </script>
+}
